@@ -1,4 +1,26 @@
+body {
+	background: #192a56;
+}
+
 .App {
-	background: #2f3640;
-	text-align: center;
+	padding: 2rem;
+}
+
+.log-search {
+	display: flex;
+}
+
+.filter {
+	flex: 0.1;
+	background: #273c75;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	margin-right: 15px;
+	padding: 1rem;
+}
+
+.log-view {
+	flex: 0.9;
+	padding: 1rem;
+	background: #273c75;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
