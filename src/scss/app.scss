@@ -1,17 +1,10 @@
+@import "vendor/react-md";
 @import "variables/colors";
+@import "tools/mixins";
 
-body {
-    background: $materialDark;
-}
+@import "base/body";
 
-.log-search {
-    display: flex;
+@import "modules/log-search";
+@import "modules/filter";
+@import "modules/log-view";
 
-    .filter {
-        flex: 0.2;
-    }
-
-    .log-view {
-        flex: 0.8;
-    }
-}

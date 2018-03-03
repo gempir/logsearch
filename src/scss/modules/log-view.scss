@@ -1,0 +1,5 @@
+.log-view {
+    flex: 0.9;
+    background: $grey-medium;
+    @include box-shadow(1);
+}

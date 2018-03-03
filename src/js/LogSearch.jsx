@@ -29,11 +29,7 @@ export default class LogSearch extends Component {
 			<div className="log-search">
                 <Filter 
                     channels={this.state.channels} 
-                    selectedChannel={this.state.selectedChannel} 
-                    onChange={this.onChange} 
                     onSubmit={this.onSubmit} 
-                    updateUserFilter={this.updateUserFilter}
-                    userError={this.state.userError}
                 /> 
                 <LogView logs={this.state.visibleLogs} isLoading={this.state.isLoading}/>
 
@@ -71,6 +67,7 @@ export default class LogSearch extends Component {
     } 
 
     onSubmit = (e) => {
+        console.log(e);
         this.setState({...this.state, isLoading: true});
         e.preventDefault();
 
