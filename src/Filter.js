@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { SelectField, MenuItem, TextField } from 'material-ui';
 
+const style = {
+    background: "#487eb0"
+}
+
 export default class Filter extends Component {
     render() {
 		return (
@@ -10,7 +14,7 @@ export default class Filter extends Component {
                             <MenuItem key={key} value={value} primaryText={value} />
                     )}
                 </SelectField>
-                <TextField hintText="gempir" floatingLabelText="Username" onChange={this.props.updateUserFilter}/>
+                <TextField hintText="gempir" floatingLabelText="Username" onChange={this.props.updateUserFilter} errorText={this.props.userError}/>
 			</form>
 		);
     }
