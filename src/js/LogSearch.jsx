@@ -9,12 +9,9 @@ export default class LogSearch extends Component {
         
         this.state = {
             channels: [],
-            selectedChannel: "",
             logs: [],
             visibleLogs: [],
             isLoading: false,
-            userFilter: "",
-            userError: "",
         };
 
 		fetch("https://api.gempir.com/channel").then((response) => {
@@ -29,47 +26,17 @@ export default class LogSearch extends Component {
 			<div className="log-search">
                 <Filter 
                     channels={this.state.channels} 
-                    onSubmit={this.onSubmit} 
+                    searchLogs={this.searchLogs} 
                 /> 
                 <LogView logs={this.state.visibleLogs} isLoading={this.state.isLoading}/>
-
-                {/* <Paper style={filterStyle} zDepth={1}>
-                    <Filter 
-                        channels={this.state.channels} 
-                        selectedChannel={this.state.selectedChannel} 
-                        onChange={this.onChange} 
-                        onSubmit={this.onSubmit} 
-                        updateUserFilter={this.updateUserFilter}
-                        userError={this.state.userError}
-                    /> 
-                </Paper>
-
-                <Paper style={logViewStyle} zDepth={1}> 
-                </Paper> */}
 			</div>
 		);
     }
 
-    onChange = (event, index, value) => {
-        this.setState({
-            ...this.state,
-            selectedChannel: value,
-            userError: ""
-        });
-    }
+    
 
-    updateUserFilter = (e) => {
-        this.setState({
-            ...this.state,
-            userFilter: e.target.value,
-            userError: ""
-        });
-    } 
-
-    onSubmit = (e) => {
-        console.log(e);
+    searchLogs = (channel, username) => {
         this.setState({...this.state, isLoading: true});
-        e.preventDefault();
 
         let options = {
             headers: {
@@ -77,12 +44,12 @@ export default class LogSearch extends Component {
             }
         }
 
-        fetch(`https://api.gempir.com/channel/${this.state.selectedChannel}/user/${this.state.userFilter}`, options).then(this.checkStatus).then((response) => {
+        fetch(`https://api.gempir.com/channel/${channel}/user/${username}`, options).then(this.checkStatus).then((response) => {
 			return response.json()
 		}).then((json) => {
             this.setState({...this.state, isLoading: false, logs: json, visibleLogs: json});
 		}).catch((error) => {
-            this.setState({...this.state, isLoading: false, logs: [], visibleLogs: [], userError: "Username not found"});
+            this.setState({...this.state, isLoading: false, logs: [], visibleLogs: []});
         });
     }
 

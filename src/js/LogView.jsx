@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Chip } from 'react-md';
 
 export default class LogView extends Component {
     render() {
@@ -12,7 +13,7 @@ export default class LogView extends Component {
 			<div className="log-view">
 				{this.props.logs.map((value, key) => 
 					<div key={key} className="line">
-						{/* <Chip style={this.chipStyle}>{value.timestamp}</Chip> {value.message} */}
+						<Chip label={value.timestamp} /> {value.message}
 					</div>
 				)}
 				{/* <CircularProgress 
