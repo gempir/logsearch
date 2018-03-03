@@ -1,0 +1,17 @@
+@import "variables/colors";
+
+body {
+    background: $materialDark;
+}
+
+.log-search {
+    display: flex;
+
+    .filter {
+        flex: 0.2;
+    }
+
+    .log-view {
+        flex: 0.8;
+    }
+}
