@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --content-base public",
-    "build": "node_modules/.bin/webpack -p --config webpack.config.prod.js --mode production && tar -zcvf build.tar.gz -C build . -C public ."
+    "build": "node_modules/.bin/webpack -p --config webpack.config.prod.js --mode production && tar -zcvf build.tar.gz -C build . -C ../public ."
   },
   "devDependencies": {
     "babel-loader": "^7.1.3",
