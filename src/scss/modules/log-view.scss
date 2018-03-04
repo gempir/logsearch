@@ -4,13 +4,29 @@
     @include box-shadow(1);
 
     .line {
-        padding: 1rem;
+        padding: 0.25rem;
         color: white;
-        border-bottom: 1px solid #616161;
-        line-height: 33px;
+        border-bottom: 1px solid $grey-light;
+        font-size: 13px;
+        line-height: 16px;
 
-        .md-chip {
-            margin-right: 1rem;
+        &:hover {
+            background: $grey-light;
+
+            .timestamp {
+                background: $grey-dark;
+            }
+        }
+
+        .timestamp {
+            position: relative;
+            margin-right: 0.25rem;
+            height: 16px;  
+            
+            &:hover {
+                cursor: pointer;
+                @include box-shadow(2);
+            }
         }
 
         &:last-child {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Autocomplete, TextField, Button } from 'react-md';
-
+import { Autocomplete, TextField, Button, SelectField } from 'react-md';
+import moment from "moment";
 
 export default class Filter extends Component {
 
@@ -8,46 +8,70 @@ export default class Filter extends Component {
         super(props);
 
         this.state = {
-            channelFilter: "",
-            userFilter: ""
-        }
+            channel: "",
+            username: "",
+            year: moment().year(),
+            month: moment().format("MMMM")
+         }
     }
 
     render() {
 		return (
-            <form className="filter" autoComplete="off" onSubmit={this.onSubmit.bind(this)}>
+            <form className="filter" autoComplete="off" onSubmit={this.onSubmit}>
                 <Autocomplete
                     id="channel"
                     label="Channel"
                     placeholder="forsen"
-                    value={this.state.channelFilter}
-                    onChange={this.onChannelFilterChange.bind(this)}
+                    onChange={this.onChannelChange}
+                    onAutocomplete={this.onChannelChange}
                     data={this.props.channels}
                 />
                 <TextField
                     id="username"
                     label="Username"
                     lineDirection="center"
-                    value={this.state.userFilter}
-                    onChange={this.onUserFilterChange.bind(this)}
+                    onChange={this.onUsernameChange}
                     placeholder="gempir"
                 />
-                <Button flat primary type="submit" className="show-logs">Show logs</Button>
+                <SelectField
+                    id="year"
+                    label="Year"
+                    defaultValue={moment().year()}
+                    menuItems={[moment().year(), moment().subtract(1, "year").year(),  moment().subtract(2, "year").year()]}
+                    onChange={this.onYearChange}
+                    value={this.state.year}
+                />
+                <SelectField
+                    id="month"
+                    label="Month"
+                    defaultValue={this.state.month}
+                    menuItems={["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]}
+                    onChange={this.onMonthChange}
+                    value={this.state.month}
+                />
+                <Button flat primary swapTheming type="submit" className="show-logs">Show logs</Button>
             </form>
 		)
     }
 
-    onChannelFilterChange(value) {
-        this.setState({...this.state, channelFilter: value});
+    onChannelChange = (value) => {
+        this.setState({...this.state, channel: value});
     } 
 
-    onUserFilterChange(value) {
-        this.setState({...this.state, userFilter: value});
+    onUsernameChange = (value) => {
+        this.setState({...this.state, username: value});
+    }
+    
+    onYearChange = (value) => {
+        this.setState({...this.state, year: value});
     } 
 
-    onSubmit(e) {
+    onMonthChange = (value) => {
+        this.setState({...this.state, month: value});
+    }
+
+    onSubmit = (e) => {
         e.preventDefault();
-
-        this.props.searchLogs(this.state.channelFilter, this.state.userFilter);
+        this.props.searchLogs(this.state.channel, this.state.username, this.state.year, this.state.month);
     }
 }

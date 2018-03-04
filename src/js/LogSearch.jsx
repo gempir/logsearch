@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "whatwg-fetch";
 import Filter from "./Filter";
 import LogView from "./LogView";
+import moment from "moment";
 
 export default class LogSearch extends Component {
 	constructor(props) {
@@ -33,9 +34,7 @@ export default class LogSearch extends Component {
 		);
     }
 
-    
-
-    searchLogs = (channel, username) => {
+    searchLogs = (channel, username, year, month) => {
         this.setState({...this.state, isLoading: true});
 
         let options = {
@@ -44,9 +43,14 @@ export default class LogSearch extends Component {
             }
         }
 
-        fetch(`https://api.gempir.com/channel/${channel}/user/${username}`, options).then(this.checkStatus).then((response) => {
+        fetch(`https://api.gempir.com/channel/${channel}/user/${username}/${year}/${month}`, options).then(this.checkStatus).then((response) => {
 			return response.json()
 		}).then((json) => {
+
+            for (let value of json) {
+                value.timestamp = Date.parse(value.timestamp)
+            }
+
             this.setState({...this.state, isLoading: false, logs: json, visibleLogs: json});
 		}).catch((error) => {
             this.setState({...this.state, isLoading: false, logs: [], visibleLogs: []});

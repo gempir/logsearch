@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Chip } from 'react-md';
+import moment from 'moment';
 
 export default class LogView extends Component {
     render() {
@@ -13,7 +14,7 @@ export default class LogView extends Component {
 			<div className="log-view">
 				{this.props.logs.map((value, key) => 
 					<div key={key} className="line">
-						<Chip label={value.timestamp} /> {value.message}
+						<a href={`#${value.timestamp}`}><Chip id={value.timestamp} label={this.formatDate(value.timestamp)} className="timestamp" /></a> {value.message}
 					</div>
 				)}
 				{/* <CircularProgress 
@@ -22,5 +23,9 @@ export default class LogView extends Component {
 				/> */}
 			</div>
 		);
-    }
+	}
+	
+	formatDate = (timestamp) => {
+		return moment(timestamp).format("YYYY-MM-DD HH:mm:ss UTC");
+	}
 }
