@@ -10,6 +10,7 @@ export default class LogSearch extends Component {
         
         this.state = {
             channels: [],
+            usernames: [],
             logs: [],
             visibleLogs: [],
             isLoading: false,
@@ -20,6 +21,12 @@ export default class LogSearch extends Component {
 		}).then((json) => {
 			this.setState({...this.state, channels: json.channels, selectedChannel: json.channels[0]});
         });
+
+        fetch("https://api.gempir.com/user").then((response) => {
+			return response.json()
+		}).then((json) => {
+            this.setState({...this.state, usernames: json.usernames});
+        });
 	}
 
 	render() {
@@ -27,6 +34,7 @@ export default class LogSearch extends Component {
 			<div className="log-search">
                 <Filter 
                     channels={this.state.channels} 
+                    usernames={this.state.usernames}
                     searchLogs={this.searchLogs} 
                 /> 
                 <LogView logs={this.state.visibleLogs} isLoading={this.state.isLoading}/>

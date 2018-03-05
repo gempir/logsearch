@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Autocomplete, TextField, Button, SelectField } from 'react-md';
+import { Autocomplete, Button, SelectField } from 'react-md';
 import moment from "moment";
 
 export default class Filter extends Component {
@@ -26,12 +26,13 @@ export default class Filter extends Component {
                     onAutocomplete={this.onChannelChange}
                     data={this.props.channels}
                 />
-                <TextField
+                <Autocomplete
                     id="username"
                     label="Username"
-                    lineDirection="center"
-                    onChange={this.onUsernameChange}
                     placeholder="gempir"
+                    onChange={this.onUsernameChange}
+                    onAutocomplete={this.onUsernameChange}
+                    data={this.props.usernames}
                 />
                 <SelectField
                     id="year"
