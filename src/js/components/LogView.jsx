@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Button, CircularProgress } from 'react-md';
 import moment from 'moment';
-import loadLogs from "../actions/loadLogs";
 import twitchEmotes from "../emotes/twitch";
 import reactStringReplace from "react-string-replace";
 
@@ -13,12 +12,6 @@ class LogView extends Component {
 	state = {
 		limitLoad: true,
 	};
-
-	constructor(props) {
-		super(props);
-
-		props.dispatch(loadLogs("forsen", "pajlada", "2018", "November"));
-	}
 
 	render() {
 		return (

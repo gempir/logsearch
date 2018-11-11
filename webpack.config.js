@@ -1,18 +1,15 @@
 const path = require("path");
 
-const SRC_DIR = path.resolve(__dirname, 'src');
-const BUILD_DIR = path.resolve(__dirname, 'build');
-
 module.exports = {
-    entry: './src/index.jsx',
-    output: {
-		path: BUILD_DIR,
+	entry: './src/index.jsx',
+	output: {
+		path: path.resolve(__dirname, 'public'),
 		filename: 'bundle.js',
 		publicPath: "/",
 	},
 	module: {
 		rules: [
-		    {
+			{
 				test: /\.jsx$/,
 				exclude: /node_modules/,
 				use: {
@@ -21,18 +18,8 @@ module.exports = {
 			},
 			{
 				test: /\.s?css$/,
-				use: [{
-					loader: "style-loader"
-				}, {
-					loader: "css-loader", options: {
-						sourceMap: true
-					}
-				}, {
-					loader: "sass-loader", options: {
-						sourceMap: true
-					}
-				}]
-			}
+				use: ["style-loader", "css-loader", "sass-loader"]
+			},
 		]
 	},
 	resolve: {

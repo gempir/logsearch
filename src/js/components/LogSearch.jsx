@@ -11,9 +11,7 @@ class LogSearch extends Component {
     constructor(props) {
         super(props);
 
-        props.dispatch(loadChannels()).catch((error) => {
-            toast.error("Failed to load logs: " . error);
-        });
+        props.dispatch(loadChannels());
     }
 
     render() {

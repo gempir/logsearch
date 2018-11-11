@@ -16,7 +16,7 @@
     },
     "scripts": {
         "start": "webpack-dev-server --mode development --content-base public",
-        "build": "node_modules/.bin/webpack -p --config webpack.config.prod.js --mode production && tar -zcvf build.tar.gz -C build . -C ../public ."
+        "build": "node_modules/.bin/webpack -p --mode production && cp public/index.html build/"
     },
     "devDependencies": {
         "@babel/core": "^7.1.5",
@@ -26,7 +26,7 @@
         "@babel/preset-react": "^7.0.0",
         "babel-loader": "^8.0.4",
         "css-loader": "^1.0.1",
-        "extract-text-webpack-plugin": "^3.0.2",
+        "mini-css-extract-plugin": "^0.4.4",
         "node-sass": "^4.10.0",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.1",
