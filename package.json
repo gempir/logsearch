@@ -16,7 +16,8 @@
     },
     "scripts": {
         "start": "webpack-dev-server --mode development --content-base public",
-        "build": "node_modules/.bin/webpack -p --mode production && cp public/index.html build/"
+        "build": "node_modules/.bin/webpack -p --mode production && cp public/index.html build/",
+        "deploy": "git subtree push --prefix public origin gh-pages"
     },
     "devDependencies": {
         "@babel/core": "^7.1.5",
