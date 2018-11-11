@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Chip } from 'react-md';
+import { Button, CircularProgress } from 'react-md';
 import moment from 'moment';
 import loadLogs from "../actions/loadLogs";
 import twitchEmotes from "../emotes/twitch";
 import reactStringReplace from "react-string-replace";
 
 class LogView extends Component {
+
+	static LOAD_LIMIT = 100;
+
+	state = {
+		limitLoad: true,
+	};
+
 	constructor(props) {
 		super(props);
 
@@ -15,19 +22,25 @@ class LogView extends Component {
 
 	render() {
 		return (
-			<div className="log-view">
-				{this.props.logs.slice(this.props.logs.length - 101, this.props.logs.length - 1).reverse().map((value, key) =>
-					<div key={key} className="line">
-						<a href={`#${value.timestamp}`}><span id={value.timestamp} className="timestamp">{this.formatDate(value.timestamp)}</span></a>{this.renderMessage(value.message)}
+			<div className={"log-view"}>
+				{this.getLogs().map((value, key) =>
+					<div key={key} className="line" onClick={() => this.setState({})}>
+						<span id={value.timestamp} className="timestamp">{this.formatDate(value.timestamp)}</span>{this.renderMessage(value.message)}
 					</div>
 				)}
-				{this.props.loading && <CircularProgress
-					size={80}
-					style={this.loadingStyle}
-				/>}
+				{this.getLogs().length > 0 && this.state.limitLoad && <Button className={"load-all"} raised primary onClick={() => this.setState({ ...this.state, limitLoad: false })}>Load all</Button>}
+				{this.props.loading && <CircularProgress className={"progress"} scale={10} id={"progress"} />}
 			</div>
 		);
 	}
+
+	getLogs = () => {
+		if (this.state.limitLoad) {
+			return this.props.logs.slice(this.props.logs.length - LogView.LOAD_LIMIT, this.props.logs.length).reverse();
+		} else {
+			return this.props.logs.reverse();
+		}
+	};
 
 	renderMessage = (message) => {
 		for (let emoteCode in twitchEmotes) {

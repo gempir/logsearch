@@ -1,20 +1,25 @@
 import React, { Component } from "react";
 import Filter from "./Filter";
 import LogView from "./LogView";
-import { connect } from "react-redux"; 
+import { connect } from "react-redux";
 import loadChannels from "../actions/loadChannels";
 import loadLogs from "../actions/loadLogs";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 class LogSearch extends Component {
     constructor(props) {
         super(props);
 
-        props.dispatch(loadChannels());
+        props.dispatch(loadChannels()).catch((error) => {
+            toast.error("Failed to load logs: " . error);
+        });
     }
 
     render() {
         return (
             <div className="log-search">
+                <ToastContainer />
                 <Filter
                     channels={this.props.channels}
                     searchLogs={this.searchLogs}
@@ -25,7 +30,9 @@ class LogSearch extends Component {
     }
 
     searchLogs = (channel, username, year, month) => {
-        this.props.dispatch(loadLogs(channel, username, year, month));
+        this.props.dispatch(loadLogs(channel, username, year, month)).catch((error) => {
+            toast.error("Failed to load logs: " + error.response.status);
+        });
     }
 }
 

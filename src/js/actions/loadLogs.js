@@ -1,8 +1,12 @@
 import setLogs from "./setLogs";
+import setLoading from "./setLoading";
 
 export default function (channel, username, year, month) {
     return function (dispatch, getState) {
         return new Promise((resolve, reject) => {
+
+            dispatch(setLoading(true));
+                        
             let options = {
                 headers: {
                     "Content-Type": "application/json"
@@ -25,10 +29,11 @@ export default function (channel, username, year, month) {
                     value.timestamp = Date.parse(value.timestamp)
                 }
 
-                dispatch(setLogs(json))
-
+                dispatch(setLogs(json));
+                dispatch(setLoading(false));
                 resolve();
             }).catch((error) => {
+                dispatch(setLoading(false));
                 reject(error);
             });
         });

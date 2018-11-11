@@ -5,11 +5,21 @@
     height: 97vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    border-radius: 3px;
+    position: relative;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+         
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: $grey-light;
+    }
 
     .line {
         padding: 0.25rem;
         color: white;
-        border-bottom: 1px solid $grey-light;
         font-size: 13px;
         height: 24px;
 
@@ -21,10 +31,6 @@
             height: 16px;
             width: auto;
             padding: 0 3px;
-        }
-
-        &:hover {
-            @include box-shadow(1);
         }
 
         .timestamp {
@@ -40,5 +46,17 @@
         &:last-child {
             border: 0;
         }
+    }
+
+    .load-all {
+        width: 100%;
+    }
+
+    .progress {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
 }
