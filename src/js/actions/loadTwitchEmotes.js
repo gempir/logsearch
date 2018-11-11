@@ -1,9 +1,10 @@
-import setChannels from "./setChannels";
+import setTwitchEmotes from "./setTwitchEmotes";
 
 export default function () {
     return function (dispatch, getState) {
         return new Promise((resolve, reject) => {
-            fetch("https://api.gempir.com/channel").then((response) => {
+            
+            fetch("https://twitchemotes.com/api_cache/v3/global.json").then((response) => {
                 if (response.status >= 200 && response.status < 300) {
                     return response
                 } else {
@@ -14,12 +15,14 @@ export default function () {
             }).then((response) => {
                 return response.json();
             }).then((json) => {
-                dispatch(setChannels(json.channels));
-
+                dispatch(setTwitchEmotes(json));
+                
                 resolve();
             }).catch(() => {
                 reject();
             });
+            
+            
         });
     };
 }

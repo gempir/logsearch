@@ -2,30 +2,38 @@
     flex: 0.9;
     background: $grey-medium;
     @include box-shadow(1);
+    height: 97vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     .line {
         padding: 0.25rem;
         color: white;
         border-bottom: 1px solid $grey-light;
         font-size: 13px;
-        line-height: 16px;
+        height: 24px;
+
+        p {
+            display: inline-block;
+        }
+
+        img {
+            height: 16px;
+            width: auto;
+            padding: 0 3px;
+        }
 
         &:hover {
-            background: $grey-light;
-
-            .timestamp {
-                background: $grey-dark;
-            }
+            @include box-shadow(1);
         }
 
         .timestamp {
             position: relative;
+            color: $grey-light;
             margin-right: 0.25rem;
-            height: 16px;  
-            
+
             &:hover {
-                cursor: pointer;
-                @include box-shadow(2);
+                color: $grey-lighter;
             }
         }
 
