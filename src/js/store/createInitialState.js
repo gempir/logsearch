@@ -1,7 +1,9 @@
 export default () => {
     return {
         channels: [],
-        logs: [],
+        logs: {
+            messages: [],
+        },
         loading: false,
         twitchEmotes: {},
     }

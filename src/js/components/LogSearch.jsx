@@ -29,7 +29,7 @@ class LogSearch extends Component {
 
     searchLogs = (channel, username, year, month) => {
         this.props.dispatch(loadLogs(channel, username, year, month)).catch((error) => {
-            toast.error("Failed to load logs: " + error.response.status);
+            toast.error("Failed to load logs: " + error);
         });
     }
 }

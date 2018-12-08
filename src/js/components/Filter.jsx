@@ -11,7 +11,7 @@ export default class Filter extends Component {
             channel: "",
             username: "",
             year: moment().year(),
-            month: moment().format("MMMM")
+            month: moment().format("M")
          }
     }
 
@@ -36,7 +36,7 @@ export default class Filter extends Component {
                 <SelectField
                     id="year"
                     label="Year"
-                    defaultValue={moment().year()}
+                    defaultValue={this.state.year}
                     menuItems={[moment().year(), moment().subtract(1, "year").year(),  moment().subtract(2, "year").year()]}
                     onChange={this.onYearChange}
                     value={this.state.year}
@@ -45,7 +45,7 @@ export default class Filter extends Component {
                     id="month"
                     label="Month"
                     defaultValue={this.state.month}
-                    menuItems={["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]}
+                    menuItems={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]}
                     onChange={this.onMonthChange}
                     value={this.state.month}
                 />
@@ -67,7 +67,7 @@ export default class Filter extends Component {
     } 
 
     onMonthChange = (value) => {
-        this.setState({...this.state, month: value});
+        this.setState({...this.state, month: moment().month(value).format("M")});
     }
 
     onSubmit = (e) => {

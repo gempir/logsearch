@@ -18,7 +18,7 @@ class LogView extends Component {
 			<div className={"log-view"}>
 				{this.getLogs().map((value, key) =>
 					<div key={key} className="line" onClick={() => this.setState({})}>
-						<span id={value.timestamp} className="timestamp">{this.formatDate(value.timestamp)}</span>{this.renderMessage(value.message)}
+						<span id={value.timestamp} className="timestamp">{this.formatDate(value.timestamp)}</span>{this.renderMessage(value.text)}
 					</div>
 				)}
 				{this.getLogs().length > 0 && this.state.limitLoad && <Button className={"load-all"} raised primary onClick={() => this.setState({ ...this.state, limitLoad: false })}>Load all</Button>}
@@ -29,9 +29,9 @@ class LogView extends Component {
 
 	getLogs = () => {
 		if (this.state.limitLoad) {
-			return this.props.logs.slice(this.props.logs.length - LogView.LOAD_LIMIT, this.props.logs.length).reverse();
+			return this.props.messages.slice(this.props.messages.length - LogView.LOAD_LIMIT, this.props.messages.length).reverse();
 		} else {
-			return this.props.logs.reverse();
+			return this.props.messages.reverse();
 		}
 	};
 
@@ -62,7 +62,7 @@ class LogView extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		logs: state.logs,
+		messages: state.logs.messages,
 		loading: state.loading
 	};
 };

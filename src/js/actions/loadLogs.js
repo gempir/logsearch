@@ -25,7 +25,7 @@ export default function (channel, username, year, month) {
                 return response.json()
             }).then((json) => {
     
-                for (let value of json) {
+                for (let value of json.messages) {
                     value.timestamp = Date.parse(value.timestamp)
                 }
 
